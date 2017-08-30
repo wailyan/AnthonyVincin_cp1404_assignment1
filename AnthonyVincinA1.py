@@ -34,17 +34,16 @@ def main():
     Q - Quit
     """
     print(menu)
-    choice = input(">>> ").upper()
+    choice = input(">>> ").upper().strip()
     while choice != "Q":
         if choice == "L":
             read_song_contents()
         elif choice == "A":
             # add error checking (refer to sample for info) #
-            song_name = input("Enter the song name: ")
-            song_artist = input("Enter the artist: ")
-            song_year = input("Enter the year of the song: ")
-            song_status = input("Have you learned this song?: ")
-            print(song_name, song_artist, song_year, song_status)
+            print("Song name: ")
+
+        elif choice == "C":
+            print("Enter the number of a song to mark as learned: ")
         else:
             print("Invalid option")
         print(menu)
