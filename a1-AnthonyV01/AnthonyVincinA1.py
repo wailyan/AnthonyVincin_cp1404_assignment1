@@ -37,37 +37,38 @@ def return_song_contents():
 
 
 def return_song_name():
+    # add a input to be passed into this function so that the name of the song can be seen
+    # ie. for trying to learn a learnt song #
     read_file = open(song_file, 'r')
     read_song_file = read_file.readlines()
     line_count = 0
     for line in read_song_file:
         line_count += 1
-        # print(line.split(',')) #
         each_song_name = line.split(',')
-        # print(each_song_name[0:1]) #
         print(each_song_name[0])
 
 
 def learn_song(song_info):
     count = -1
-    reverse_count = 0
     for i in list(song_info):
         count += 1
-        reverse_count += 1
-        # print("Song {} status: ".format(song_info[count:reverse_count]), i[-2:]) #
-        each_song_status = i.split(',')
-        print(each_song_status[3])
-    try:
-        number = int(input("Enter the number of a song to mark as learned: "))
-        if number < 0 or number > count:
-            print("Song number not in the list. The list goes up to {}".format(count))
-        else:
-            if 'y' in song_info[-2:]:
-                print("Valid input. Song is now set to 'learned'.")
-            if 'n' in song_info[-2:]:
-                print("Song has already been learnt!")
-    except ValueError:
-        print("Not a valid number")
+    valid_input = False
+    while not valid_input:
+        try:
+            number = int(input("Enter the number of a song to mark as learned: \n >>>"))
+            if number < 0 or number > count:
+                valid_input = False
+                print("Song number not in the list. The list goes up to {}".format(count))
+            else:
+                if ',y' in song_info[number]:
+                    valid_input = True
+                    print("Valid input. Song is now set to 'learned'.")
+                if ',n' in song_info[number]:
+                    valid_input = True
+                    print("Song has already been learnt.")
+        except ValueError:
+            valid_input = False
+            print("Invalid input; enter a valid number.")
 
 
 def main():
@@ -75,7 +76,6 @@ def main():
     print("Songs To Learn 1.0 - by Anthony Vincin")
     song_counter = song_count()
     song_info = return_song_contents()
-    print("SONG INFO:",song_info)
     menu = """
     Menu:
     L - List songs
