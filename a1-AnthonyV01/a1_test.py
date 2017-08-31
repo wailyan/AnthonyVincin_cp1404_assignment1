@@ -1,4 +1,4 @@
-song_file = "songs_to_learn.csv"
+song_file = "songs.csv"
 open_song_file = open(song_file, 'a+')
 
 

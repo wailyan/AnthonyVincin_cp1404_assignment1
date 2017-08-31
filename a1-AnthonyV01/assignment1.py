@@ -1,7 +1,9 @@
 """
-Replace the contents of this module docstring with your own details.
+' assignment1.py ' by Anthony Vincin
+Date : 1/09/2017 
+GitHub URL: https://github.com/AnthonyV01/AnthonyVincin_cp1404_assignment1
 """
-song_file = "songs_to_learn.csv"
+song_file = "songs.csv"
 open_song_file = open(song_file, 'a+')
 
 
