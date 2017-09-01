@@ -1,21 +1,22 @@
+"""
+' assignment1.py ' by Anthony Vincin
+Date : 1/09/2017 
+GitHub URL: https://github.com/AnthonyV01/AnthonyVincin_cp1404_assignment1
+"""
 song_file = "songs.csv"
 open_song_file = open(song_file, 'a+')
 
 
-def song_count():
-    read_file = open(song_file, 'r')
+def song_count(song_info):
     song_counter = 0
-    for line in read_file:
+    for line in song_info:
         song_counter += 1
     print("{} songs loaded".format(song_counter))
     return song_counter
 
 
-def list_song_contents():
-    read_file = open(song_file, 'r')
-    read_song_file = read_file.readlines()
+def list_song_contents(song_info):
     line_count = -1
-    song_info = read_song_file
     for line in song_info:
         line_count += 1
         split_song_info = line.split(',')
@@ -25,8 +26,7 @@ def list_song_contents():
             print("{}.   {:30} - {:25} ({})".format(line_count, split_song_info[0], split_song_info[1], split_song_info[2]))
 
 
-def return_song_contents():
-    read_file = open(song_file, 'r')
+def return_song_contents(read_file):
     read_song_file = read_file.readlines()
     line_count = 0
     song_info = read_song_file
@@ -36,13 +36,11 @@ def return_song_contents():
     return song_info
 
 
-def return_song_name():
+def return_song_name(song_info):
     # add a input to be passed into this function so that the name of the song can be seen
     # ie. for trying to learn a learnt song #
-    read_file = open(song_file, 'r')
-    read_song_file = read_file.readlines()
     line_count = 0
-    for line in read_song_file:
+    for line in song_info:
         line_count += 1
         each_song_name = line.split(',')
         print(each_song_name[0])
@@ -71,11 +69,31 @@ def learn_song(song_info):
             print("Invalid input; enter a valid number.")
 
 
+def error_check(input):
+        try:
+            if input == "":
+                print("Input can not be blank")
+        except:
+            print("Finished")
+
+
+def add_song():
+    valid_input = False
+    new_song = []
+    title_of_song = input("Title: ").strip()
+    error_check(title_of_song)
+    # artist_of_song = input("Artist: ").strip() #
+    # year_of_song = input("Year: ").strip() #
+    # status_of_song = input("Does this song need to be learnt? Yes ('y') or No ('n')") #
+
+
 def main():
-    return_song_name()
+    read_file = open(song_file, 'r')
+    song_info = return_song_contents(read_file)
+    return_song_name(song_info)
     print("Songs To Learn 1.0 - by Anthony Vincin")
-    song_counter = song_count()
-    song_info = return_song_contents()
+    song_counter = song_count(song_info)
+
     menu = """
     Menu:
     L - List songs
@@ -87,10 +105,10 @@ def main():
     choice = input(">>> ").upper().strip()
     while choice != "Q":
         if choice == "L":
-            list_song_contents()
+            list_song_contents(song_info)
         elif choice == "A":
             # add error checking (refer to sample for info) #
-            print("Song name: ")
+            add_song()
         elif choice == "C":
             learn_song(song_info)
         else:
@@ -99,4 +117,5 @@ def main():
         choice = input(">>> ").upper()
     print("Have a nice day :)")
     open_song_file.close()
-main()
+if __name__ == '__main__':
+    main()
