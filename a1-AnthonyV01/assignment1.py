@@ -53,14 +53,13 @@ def learn_song(song_info, song_counter):
             valid_input = False
             print("Invalid input; enter a valid number.")
     if song_info[number][len(song_info[number]) - 1] == 'y':
-        song_info[number][len(song_info[number])- 1] = 'n'
+        song_info[number][len(song_info[number]) - 1] = 'n'
         print(song_info[number][0], "learned.")
     else:
         print("Song already learnt.")
 
 
 def add_song(song_info, song_counter):
-    valid_input = False
     new_song = []
     title_of_song = input("Title: ").strip()
     while len(title_of_song) < 1:
@@ -114,9 +113,9 @@ def main():
         print(menu)
         choice = input(">>> ").upper()
     print("Have a nice day :)")
-    open_song_file = open(song_file, 'w')
+    write_song_file = open(song_file, 'w')
     for line in song_info:
-        print("{},{},{},{}".format(line[0],line[1],line[2],line[3]),file=open_song_file)
+        print("{},{},{},{}".format(line[0], line[1], line[2], line[3]),file=write_song_file)
     open_song_file.close()
     read_file.close()
 if __name__ == '__main__':
