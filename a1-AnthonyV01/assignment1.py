@@ -5,7 +5,7 @@ GitHub URL: https://github.com/AnthonyV01/AnthonyVincin_cp1404_assignment1
 
 """
 song_file = "songs.csv"
-open_song_file = open(song_file, 'a+')
+open_song_file = open(song_file, 'r')
 
 
 def list_song_contents(song_info):
@@ -89,6 +89,7 @@ def add_song(song_info, song_counter):
 def main():
     read_file = open(song_file, 'r')
     song_info, song_counter = return_song_contents(read_file)
+    read_file.close()
     # return_song_name(song_info) #
     print("Songs To Learn 1.0 - by Anthony Vincin")
     print("{} songs loaded".format(song_counter))
@@ -106,7 +107,6 @@ def main():
             list_song_contents(song_info)
         elif choice == "A":
             song_counter = add_song(song_info, song_counter)
-            print(song_info)
         elif choice == "C":
             learn_song(song_info, song_counter)
         else:
@@ -114,6 +114,10 @@ def main():
         print(menu)
         choice = input(">>> ").upper()
     print("Have a nice day :)")
+    open_song_file = open(song_file, 'w')
+    for line in song_info:
+        print("{},{},{},{}".format(line[0],line[1],line[2],line[3]),file=open_song_file)
     open_song_file.close()
+    read_file.close()
 if __name__ == '__main__':
     main()
